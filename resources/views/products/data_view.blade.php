@@ -4,9 +4,34 @@
             @foreach ($products as $product)
                 <div class="col">
                     <div class="single_product mb-0">
-                        <div class="product_thumb">
-                            <img src="images/product/1.jpg" alt="product1" class="rounded primary_img">
-                            {{-- <a href="#" class="secondary_img"><img src="images/product/2.jpg" alt="product1"></a> --}}
+                        <div class="product_thumb bg-white rounded ">
+                            @if($image_type == 'WhiteGold' || $image_type == 'platinum' )
+                            <img src="{{ asset($product->attr_whitegold_platinum_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                            @elseif($image_type == 'any')
+                                @if ($product->attr_whitegold_platinum_round_default_img != null)
+                                <img src="{{ asset($product->attr_whitegold_platinum_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                                @elseif($product->attr_yellowgold_round_default_img != null)
+                                <img src="{{ asset($product->attr_yellowgold_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                                @elseif($product->attr_rosegold_round_default_img != null)
+                                <img src="{{ asset($product->attr_rosegold_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                                @elseif($product->attr_tricolor_round_default_img != null)
+                                <img src="{{ asset($product->attr_tricolor_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                                @elseif($product->attr_whitegold_yellow_round_default_img != null)
+                                <img src="{{ asset($product->attr_whitegold_yellow_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                                @elseif($product->attr_whitegold_rose_round_default_img != null)
+                                <img src="{{ asset($product->attr_whitegold_rose_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                                @endif
+                            @elseif($image_type == 'YellowGold')
+                            <img src="{{ asset($product->attr_yellowgold_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                            @elseif($image_type == 'RoseGold')
+                            <img src="{{ asset($product->attr_rosegold_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                            @elseif($image_type == 'TriColor')
+                            <img src="{{ asset($product->attr_tricolor_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                            @elseif($image_type == 'WYG')
+                            <img src="{{ asset($product->attr_whitegold_yellow_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                            @elseif($image_type == 'WRG')
+                            <img src="{{ asset($product->attr_whitegold_rose_round_default_img) }}" alt="product1" class="rounded size-200 primary_img">
+                            @endif
                             <div class="quick_button">
                                 {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#product_modal_box" data-bs-placement="top"
                         data-original-title="product view" data-sku={{ $product->prod_sku }} class="showDetails">Quick
@@ -23,7 +48,13 @@
                             <h3 class="text-white text-lead small">{{ $product->prod_name }}
                             </h3>
                             <div class="price_box">
+                                @if($product_type == '14k')
                                 <span class="current_price">Rs. {{ $product->attr_14k_regular }}</span>
+                                @elseif ($product_type == '18k')
+                                <span class="current_price">Rs. {{ $product->attr_18k_regular }}</span>
+                                @else
+                                <span class="current_price">Rs. {{ $product->attr_platinum_regular }}</span>
+                                @endif
                             </div>
                             <div class="product_hover">
                                 <div class="product_ratings">

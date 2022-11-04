@@ -214,9 +214,3 @@ function get_product_type(MyRadios) {
     filter_data();
     // console.log(product_14k);
 }
-
-// function get_18k(MyRadios) {
-//     product_18k = MyRadios.value;
-//     filter_data();
-//     // console.log(product_14k);
-// }

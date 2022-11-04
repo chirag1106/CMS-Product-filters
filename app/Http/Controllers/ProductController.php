@@ -10,6 +10,8 @@ class ProductController extends Controller
 {
     public $image_type = 'any';
     public $filters = [];
+    public $product_type = '14k';
+
     public function index()
     {
         return view('products.index');
@@ -18,7 +20,7 @@ class ProductController extends Controller
     public function showProducts(Request $request)
     {
         $products = DB::table('product')->paginate(12, ['*'], 'page', $request->page);
-        return view('products.products', ['products' => $products, 'image_type' => $this->image_type ]);
+        return view('products.products', ['products' => $products, 'image_type' => $this->image_type, 'product_type' => $this->product_type ]);
     }
 
 
@@ -30,17 +32,25 @@ class ProductController extends Controller
             $products = DB::table('product');
 
             if ($request->has('product_type') && !empty($request->product_type)) {
+                if($request->product_type == 'platinum'){
+                    $this->product_type = 'platinum' ;
+                    $product_metal = 'WhiteGold';
+                }
+                else{
                 $split = explode('_', $request->product_type);
-                $product_type = $split[0] ;
+                $this->product_type = $split[0] ;
                 $product_metal = str_replace(' ', '', $split[1]);
-
-                $this->filters += ['product_type' => $product_type];
+                }
+                $this->filters += ['product_type' => $this->product_type];
                 $this->filters += ['product_metal' => $product_metal];
                 $this->image_type = $product_metal;
-                if($product_type == '14k'){
+                if($this->product_type == '14k'){
                     $products = $products->whereNotNull('attr_14k_regular')->whereRaw('FIND_IN_SET(?, REPLACE(attr_14k_metal_available, " ", ""))', [$product_metal]);
-                }else{
+                }else if($this->product_type == '18k'){
                     $products = $products->whereNotNull('attr_18k_regular')->whereRaw('FIND_IN_SET(?, REPLACE(attr_18k_metal_available, " ", ""))', [$product_metal]);
+                }
+                else{
+                    $products = $products->whereNotNull('attr_platinum_regular');
                 }
             }
 
@@ -81,18 +91,21 @@ class ProductController extends Controller
 
                     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
                 }
-                else if ($this->filters['product_type'] == '14k' ){
+                if ($this->filters['product_type'] == '14k' ){
                     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
                 }
-                else{
+                if($this->filters['product_type'] == '18k'){
                     $products = $products->whereBetween('attr_18k_regular', [$request->min_price, $request->max_price]);
+                }
+                if($this->filters['product_type'] == 'platinum'){
+                    $products = $products->whereBetween('attr_platinum_regular', [$request->min_price, $request->max_price]);
                 }
             }
 
 
             $products = $products->paginate(12, ['*'], 'page', $request->page);
 
-            $view =  view('products.data_view', ['products' => $products, 'image_type' => $this->image_type ])->render();
+            $view =  view('products.data_view', ['products' => $products, 'image_type' => $this->image_type, 'product_type' => $this->product_type ])->render();
             return $view;
         }
     }

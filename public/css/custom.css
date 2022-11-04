@@ -121,3 +121,8 @@
 .text-bold{
     font-weight: 600 !important;
 }
+
+.size-200{
+    height: 200px;
+    width: 200px;
+}

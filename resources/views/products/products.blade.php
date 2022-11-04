@@ -25,12 +25,24 @@
                                         <strong class="">&nbsp;Loading...</strong>
                                     </div>
 
+
                                     <ul class="list-menu product_type_label_14">
 
                                     </ul>
                                     <hr>
                                     <ul class="list-menu product_type_label_18">
 
+                                    </ul>
+                                    <hr>
+                                    <ul class="list-menu product_type_label_platinum">
+                                        <li>
+                                            <div class="d-flex justify-content-between align-items-center align-content-center">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="product_type" type="radio" value="platinum" onclick="get_product_type(this);">
+                                                    <label class="form-check-label">Platinum</label>
+                                                </div>
+                                            </div>
+                                        </li>
                                     </ul>
 
                                 </div> <!-- card-body.// -->
