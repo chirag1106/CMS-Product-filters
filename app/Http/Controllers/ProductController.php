@@ -83,24 +83,24 @@ class ProductController extends Controller
                 $products = $products->where('prodmeta_section', $request->gender);
             }
 
-            if ($request->has('min_price') && !empty($request->min_price) && $request->has('max_price') && !empty($request->max_price)) {
+            if ($request->has('min_price') && $request->has('max_price')) {
                 $this->filters += ['min_price' => $request->min_price];
                 $this->filters += ['max_price' => $request->max_price];
 
                 if( $request->product_type == null ){
-
                     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
                 }
-                if ($this->filters['product_type'] == '14k' ){
+                elseif ($this->filters['product_type'] == '14k' ){
                     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
                 }
-                if($this->filters['product_type'] == '18k'){
+                else if($this->filters['product_type'] == '18k'){
                     $products = $products->whereBetween('attr_18k_regular', [$request->min_price, $request->max_price]);
                 }
-                if($this->filters['product_type'] == 'platinum'){
+                else{
                     $products = $products->whereBetween('attr_platinum_regular', [$request->min_price, $request->max_price]);
                 }
             }
+
 
 
             $products = $products->paginate(12, ['*'], 'page', $request->page);
