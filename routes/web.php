@@ -27,8 +27,6 @@ Route::post('/upload', [ExcelController::class, 'upload'])->name('upload');
 
 Route::get('/products', [ProductController::class, 'showProducts'])->name('products');
 
-Route::get('/cart', [ProductController::class, 'showCart'])->name('showCart');
-
 Route::post('/getAllProducts', [ProductController::class, 'getAllProducts']);
 Route::post('/showDetails/{prod_sku}', [ProductController::class, 'showDetails']);
 Route::get('/product/{prod_sku}', [ProductController::class, 'showParticularProduct']);

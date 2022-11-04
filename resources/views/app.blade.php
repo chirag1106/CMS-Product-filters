@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/slider.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('/css/product_view_style.css') }}"> --}}
 </head>
 
 <body>
@@ -282,7 +283,7 @@
 
         @yield('import-excel')
 
-
+        @yield('product_info')
 
         {{-- End Page Including --}}
 
@@ -506,76 +507,6 @@
         </div>
     </div>
     <!-- modal section ends -->
-
-    {{-- Product Show Modal --}}
-    <div class="modal fade" id="product_modal_box" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal_body">
-                    <div class="container show_product_info">
-                        {{-- <div class="row">
-                            <div class="col-lg-5 col-md-5 col-sm-12">
-                                <div class="modal_tab">
-                                    <div class="tab-content product-details-large pt-0">
-                                        <div class="tab-pane fade show active border border-dark rounded" id="tab1" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <img src="images/product/70.jpg" alt="" class="rounded">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal_social mt-4">
-                                        <h2>Share this Product</h2>
-                                        <ul>
-                                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-rss"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-youtube"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-md-7 col-sm-12">
-                                <div class="modal_right">
-                                    <div class="modal_title mb-10">
-                                        <h2>Women's </h2>
-                                    </div>
-                                    <div class="modal_price mb-10">
-                                        <span class="new_price">Rs. 51164</span>
-                                        <span class="old_price">Rs. 54164</span>
-                                    </div>
-                                    <div class="see_all">
-                                        <a href="#">See All Features</a>
-                                    </div>
-                                    <div class="modal_add_to_cart mb-15">
-                                        <form action="#">
-                                            <input type="number" min="0" max="100" step="1">
-                                            <button type="submit">Add To Cart</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal_description mb-15">
-                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus quibusdam
-                                            nisi voluptas consequatur tempora, recusandae nemo blanditiis eaque odit
-                                            voluptatibus voluptatem, ipsa incidunt fugiat a.</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <!-- JavaScript Bundle with Popper.js -->

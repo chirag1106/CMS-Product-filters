@@ -1,4 +1,4 @@
-<div class="product_container">
+<div class="product_container position-relative">
     <div class="grid product_black_section">
         @if ($products->count())
             @foreach ($products as $product)
@@ -91,5 +91,9 @@
     </div>
     <div class="pagin_link">
         {{ $products->links() }}
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center align-content-center center d-none loader">
+        <img src="{{ asset('/images/loader.gif') }}" alt="loader" class="">
     </div>
 </div>

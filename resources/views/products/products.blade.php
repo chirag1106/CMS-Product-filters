@@ -14,7 +14,7 @@
                                     <i class="fa-solid fa-caret-down"></i>&nbsp;
                                     <h6 class="title mb-0">Product type</h6>
                                 </a>
-                                <a href="#" class="btn btn-danger reset-product-type text-small reset-btn">Reset</a>
+                                <a href="#" class="btn btn-danger text-small reset-btn" onclick="reset_product_type();">Reset</a>
                             </header>
                             <div class="filter-content collapse show" id="collapse_1" style="">
                                 <div class="card-body">
@@ -56,7 +56,7 @@
                                     <i class="fa-solid fa-caret-down"></i>&nbsp;
                                     <h6 class="title mb-0">Price range </h6>
                                 </a>
-                                <a href="#" class="btn btn-danger reset-sort-by text-small reset-btn">Reset</a>
+                                {{-- <a href="#" class="btn btn-danger text-small reset-btn">Reset</a> --}}
                             </header>
                             <div class="filter-content collapse show" id="collapse_2" style="">
                                 <div class="card-body">
@@ -93,7 +93,7 @@
                                     <i class="fa-solid fa-caret-down"></i>&nbsp;
                                     <h6 class="title mb-0">Gender</h6>
                                 </a>
-                                <a href="#" class="btn btn-danger reset-sort-by text-small reset-btn">Reset</a>
+                                <a href="#" class="btn btn-danger text-small reset-btn" onclick="reset_gender();">Reset</a>
                             </header>
                             <div class="filter-content collapse show" id="collapse_3" style="">
                                 <div class="card-body">
@@ -121,7 +121,7 @@
                                     <i class="fa-solid fa-caret-down"></i>&nbsp;
                                     <h6 class="title mb-0">Sub-Categories</h6>
                                 </a>
-                                <a href="#" class="btn btn-danger reset-sort-by text-small reset-btn">Reset</a>
+                                <a href="#" class="btn btn-danger text-small reset-btn" onclick="reset_sub_cat();">Reset</a>
                             </header>
                             <div class="filter-content collapse show" id="collapse_5" style="">
                                 <div class="card-body">
@@ -146,7 +146,7 @@
                                     <i class="fa-solid fa-caret-down"></i>&nbsp;
                                     <h6 class="title mb-0">Sort By</h6>
                                 </a>
-                                <a href="#" class="btn btn-danger reset-sort-by text-small reset-btn">Reset</a>
+                                <a href="#" class="btn btn-danger text-small reset-btn" onclick="reset_sort_by();">Reset</a>
                             </header>
                             <div class="filter-content collapse in" id="collapse_6" style="">
                                 <div class="card-body">

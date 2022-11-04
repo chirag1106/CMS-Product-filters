@@ -121,11 +121,13 @@ function infinteLoadMore(
         dataType: "html",
         beforeSend: function () {
             $("#post_data").empty();
+            $('.loader').show();
         },
         success: function (response3) {
             $("#post_data").append(response3);
         },
         complete: function () {
+            $('.loader').hide();
             $("html, body").animate({ scrollTop: 0 }, "fast");
         },
     });
@@ -149,8 +151,7 @@ let product_type = null;
 //             gender,
 //             min_price,
 //             max_price,
-//             product_14k,
-//             product_18k
+//             product_type
 //         );
 //     }
 // });
@@ -172,6 +173,7 @@ $(document).on("click", ".pagination a", function (e) {
 });
 
 function filter_data() {
+
     page = 1;
     infinteLoadMore(
         page,
@@ -214,3 +216,29 @@ function get_product_type(MyRadios) {
     filter_data();
     // console.log(product_14k);
 }
+
+function reset_sort_by(){
+    $('input[name="sort"]').filter(':checked').prop('checked', false);
+    sort_type = null;
+    filter_data();
+}
+
+function reset_sub_cat(){
+    $('input[name="sub_cat"]').filter(':checked').prop('checked', false);
+    sub_cat_type = null;
+    filter_data();
+}
+
+function reset_gender(){
+    $('input[name="gender"]').filter(':checked').prop('checked', false);
+    gender = null;
+    filter_data();
+}
+
+function reset_product_type(){
+    $('input[name="product_type"]').filter(':checked').prop('checked', false);
+    product_type = null;
+    filter_data();
+}
+
+

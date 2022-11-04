@@ -20,36 +20,32 @@ class ProductController extends Controller
     public function showProducts(Request $request)
     {
         $products = DB::table('product')->paginate(12, ['*'], 'page', $request->page);
-        return view('products.products', ['products' => $products, 'image_type' => $this->image_type, 'product_type' => $this->product_type ]);
+        return view('products.products', ['products' => $products, 'image_type' => $this->image_type, 'product_type' => $this->product_type]);
     }
 
 
     public function getPaginate(Request $request)
     {
-
         if ($request->ajax()) {
-
             $products = DB::table('product');
 
             if ($request->has('product_type') && !empty($request->product_type)) {
-                if($request->product_type == 'platinum'){
-                    $this->product_type = 'platinum' ;
+                if ($request->product_type == 'platinum') {
+                    $this->product_type = 'platinum';
                     $product_metal = 'WhiteGold';
-                }
-                else{
-                $split = explode('_', $request->product_type);
-                $this->product_type = $split[0] ;
-                $product_metal = str_replace(' ', '', $split[1]);
+                } else {
+                    $split = explode('_', $request->product_type);
+                    $this->product_type = $split[0];
+                    $product_metal = str_replace(' ', '', $split[1]);
                 }
                 $this->filters += ['product_type' => $this->product_type];
                 $this->filters += ['product_metal' => $product_metal];
                 $this->image_type = $product_metal;
-                if($this->product_type == '14k'){
+                if ($this->product_type == '14k') {
                     $products = $products->whereNotNull('attr_14k_regular')->whereRaw('FIND_IN_SET(?, REPLACE(attr_14k_metal_available, " ", ""))', [$product_metal]);
-                }else if($this->product_type == '18k'){
+                } else if ($this->product_type == '18k') {
                     $products = $products->whereNotNull('attr_18k_regular')->whereRaw('FIND_IN_SET(?, REPLACE(attr_18k_metal_available, " ", ""))', [$product_metal]);
-                }
-                else{
+                } else {
                     $products = $products->whereNotNull('attr_platinum_regular');
                 }
             }
@@ -83,29 +79,25 @@ class ProductController extends Controller
                 $products = $products->where('prodmeta_section', $request->gender);
             }
 
-            if ($request->has('min_price') && $request->has('max_price')) {
+            if ($request->min_price || $request->max_price) {
                 $this->filters += ['min_price' => $request->min_price];
                 $this->filters += ['max_price' => $request->max_price];
 
-                if( $request->product_type == null ){
+                // if( $request->product_type == null ){
+                //     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
+                // }
+                if ($this->product_type == '14k') {
                     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
-                }
-                elseif ($this->filters['product_type'] == '14k' ){
-                    $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
-                }
-                else if($this->filters['product_type'] == '18k'){
+                } else if ($this->product_type == '18k') {
                     $products = $products->whereBetween('attr_18k_regular', [$request->min_price, $request->max_price]);
-                }
-                else{
+                } else {
                     $products = $products->whereBetween('attr_platinum_regular', [$request->min_price, $request->max_price]);
                 }
             }
 
-
-
             $products = $products->paginate(12, ['*'], 'page', $request->page);
 
-            $view =  view('products.data_view', ['products' => $products, 'image_type' => $this->image_type, 'product_type' => $this->product_type ])->render();
+            $view =  view('products.data_view', ['products' => $products, 'image_type' => $this->image_type, 'product_type' => $this->product_type])->render();
             return $view;
         }
     }
@@ -120,7 +112,6 @@ class ProductController extends Controller
         $result = array_values($result);
         sort($result);
         echo json_encode(array('sub_cat' => $result));
-        // dd($each_sub_cat);
         // return $result;
     }
 
@@ -138,29 +129,7 @@ class ProductController extends Controller
 
     public function getAvailableOptions()
     {
-        // if ($type == 'attr_14k_metal_available') {
-        //     $available_options = DB::table('product')->select(DB::raw("GROUP_CONCAT(attr_14k_metal_available SEPARATOR ',') as `names`"))->get()->toArray();
-        //     $each_options = explode(',', $available_options[0]->names);
-        //     $each_options = array_map('trim', $each_options);
-        //     $result = array_unique($each_options);
-        //     $result = array_values($result);
-        //     // $result = array_count_values($each_options);
-        //     sort($result);
-        //     echo json_encode(a$result);
-        //     // return $result;
 
-        // } elseif ($type == "attr_18k_metal_available") {
-        //     $available_options = DB::table('product')->select(DB::raw("GROUP_CONCAT(attr_18k_metal_available SEPARATOR ',') as `names`"))->get()->toArray();
-        //     $each_options = explode(',', $available_options[0]->names);
-        //     $each_options = array_map('trim', $each_options);
-        //     $result = array_count_values($each_options);
-        //     ksort($result);
-        //     // echo json_encode($result);
-        //     return $result;
-        // }
-
-
-        // if ($type == 'attr_14k_metal_available') {
         $ans = null;
         $available_options = DB::table('product')->select(DB::raw("GROUP_CONCAT(attr_14k_metal_available SEPARATOR ',') as `names`"))->get()->toArray();
         $each_options = explode(',', $available_options[0]->names);
@@ -170,34 +139,23 @@ class ProductController extends Controller
         // $result = array_count_values($each_options);
         sort($result_14);
 
-        // echo json_encode(a$result);
-        // return $result;
-
-        // } elseif ($type == "attr_18k_metal_available") {
         $available_options = DB::table('product')->select(DB::raw("GROUP_CONCAT(attr_18k_metal_available SEPARATOR ',') as `names`"))->get()->toArray();
         $each_options = explode(',', $available_options[0]->names);
         $each_options = array_map('trim', $each_options);
         // $result_18 = array_count_values($each_options);
         $result_18 = array_unique($each_options);
         $result_18 = array_values($result_18);
-        // $result = array_count_values($each_options);
         sort($result_18);
         $ans = array(
             'carat_14' => $result_14,
             'carat_18' => $result_18
         );
         echo json_encode($ans);
-        // return $result;
-        // }
-
     }
 
     public function showDetails($prod_sku)
     {
         $product_info = Product::where('prod_sku', '=', $prod_sku)->get()->toArray();
-        // echo '<pre>';
-        // print_r($product_info);
-        // die();
         $html = null;
         foreach ($product_info as $product) {
 
@@ -277,9 +235,8 @@ class ProductController extends Controller
 
     public function showParticularProduct($prod_sku)
     {
-        $product_info = Product::where('prod_sku', '=', $prod_sku)->get()->toArray();
-        echo '<pre>';
-        print_r($product_info);
-        die();
+        $product = Product::where('prod_sku', '=', $prod_sku)->get()->toArray();
+        return view('products.product_view', ['product' => $product]);
+
     }
 }
