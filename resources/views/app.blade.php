@@ -11,7 +11,7 @@
     <title>Ashirwaad Jewelry | @yield('title')</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" >
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/slider.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('/css/product_view_style.css') }}"> --}}
 </head>
 
 <body>
@@ -66,7 +65,7 @@
                                         <a href="#">My Account <i class="ion-chevron-down"></i></a>
                                         <ul class="dropdown_links">
                                             <li><a href="#">Checkout</a></li>
-                                            <li><a href="#">My Account</a></li>
+                                            <li><a href="{{ route('admin') }}">Admin Login</a></li>
                                             <li><a href="#">Shopping Cart</a></li>
                                             <li><a href="#">Wishlist</a></li>
                                         </ul>
@@ -84,20 +83,21 @@
                 <div class="container">
                     <div class="row align-items-center justify-content-between">
 
-                        {{-- <div class="col-lg-5">
+                        <div class="col-lg-5">
                             <div class="home_contact">
                                 <div class="contact_icone">
-                                    <img src="images/icon/icon_phone.png" alt="">
+                                    <img src="{{ asset('images/icon/icon_phone.png') }}" alt="">
                                 </div>
                                 <div class="contact_box">
-                                    <p>Inquiry / Helpline : <a href="tel: 1234567894">1234567894</a></p>
+                                    <p>Inquiry / Helpline : <a href="tel: 9711672424">+91-9711672424</a></p>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="col-lg-2 col-md-3 col-4">
                             <div class="logo">
-                                <a href="index.html"><img src="images/logo/logo-ash.png" alt=""></a>
+                                <a href="{{ route('main') }}"><img src="{{ asset('images/logo/logo-ash.png') }}"
+                                        alt=""></a>
                             </div>
                         </div>
 
@@ -133,7 +133,8 @@
                                         </div>
                                         <div class="cart_item">
                                             <div class="cart_img">
-                                                <a href="#"><img src="images/nav-product/product.jpg"
+                                                <a href="#"><img
+                                                        src="{{ asset('images/nav-product/product.jpg') }}"
                                                         alt=""></a>
                                             </div>
                                             <div class="cart_info">
@@ -147,7 +148,8 @@
                                         </div>
                                         <div class="cart_item">
                                             <div class="cart_img">
-                                                <a href="#"><img src="images/nav-product/product2.jpg"
+                                                <a href="#"><img
+                                                        src="{{ asset('images/nav-product/product2.jpg') }}"
                                                         alt=""></a>
                                             </div>
                                             <div class="cart_info">
@@ -190,7 +192,8 @@
                         <div class="col-12">
                             <div class="main_menu_inner">
                                 <div class="logo_sticky">
-                                    <a href="#"><img src="images/logo/logo-ash.png" alt="logo"></a>
+                                    <a href="#"><img src="{{ asset('images/logo/logo-ash.png') }}"
+                                            alt="logo"></a>
                                 </div>
                                 <div class="main_menu">
                                     <nav>
@@ -329,7 +332,7 @@
                                 <h3>My Account</h3>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="{{ route('admin') }}">Admin Login</a></li>
                                         <li><a href="#">Contact</a></li>
                                         <li><a href="#">Wishlist</a></li>
                                         <li><a href="#">Portfolio</a></li>
@@ -345,7 +348,8 @@
                                 <div class="simple_product">
                                     <div class="simple_product_items">
                                         <div class="simple_product_thumb">
-                                            <a href="#"><img src="images/product/14.jpg" alt=""></a>
+                                            <a href="#"><img src="{{ asset('images/product/14.jpg') }}"
+                                                    alt=""></a>
                                         </div>
                                         <div class="simple_product_content">
                                             <div class="tag_cate">
@@ -363,7 +367,8 @@
                                     </div>
                                     <div class="simple_product_items">
                                         <div class="simple_product_thumb">
-                                            <a href="#"><img src="images/product/28.jpg" alt=""></a>
+                                            <a href="#"><img src="{{ asset('images/product/28.jpg') }}"
+                                                    alt=""></a>
                                         </div>
                                         <div class="simple_product_content">
                                             <div class="tag_cate">
@@ -390,7 +395,7 @@
                             <div class="copyright_area">
                                 <p>Copyright &copy; 2022 <a href="{{ route('main') }}">ashirwaad</a> All rights
                                     Reserved.</p>
-                                <img src="images/icon/papyel2.png" alt="">
+                                <img src="{{ asset('images/icon/papyel2.png') }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -400,113 +405,6 @@
         </footer>
         <!-- footer section ends -->
     </div>
-
-    <!-- modal section starts -->
-    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5 col-sm-12">
-                                <div class="modal_tab">
-                                    <div class="tab-content product-details-large">
-                                        <div class="tab-pane fade show active" id="tab1" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="images/product/70.jpg"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="images/product/71.jpg"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="tab3" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="images/product/72.jpg"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="tab4" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="images/product/73.jpg"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal_tab_button">
-                                        <ul class="nav product_navactive owl-carousel" role="tablist">
-                                            <li>
-                                                <a href="#tab1" class="nav-link active" data-toggle="tab"
-                                                    role="tab" aria-controls="tab1" aria-selected="false"><img
-                                                        src="images/product/70.jpg" alt=""></a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab2" class="nav-link" data-toggle="tab" role="tab"
-                                                    aria-controls="tab2" aria-selected="false"><img
-                                                        src="images/product/71.jpg" alt=""></a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab3" class="nav-link button_three" data-toggle="tab"
-                                                    role="tab" aria-controls="tab3" aria-selected="false"><img
-                                                        src="images/product/72.jpg" alt=""></a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab4" class="nav-link" data-toggle="tab" role="tab"
-                                                    aria-controls="tab4" aria-selected="false"><img
-                                                        src="images/product/73.jpg" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-md-7 col-sm-12">
-                                <div class="modal_right">
-                                    <div class="modal_title mb-10">
-                                        <h2>Women's Necklace</h2>
-                                    </div>
-                                    <div class="modal_price mb-10">
-                                        <span class="new_price">Rs. 51164</span>
-                                        <span class="old_price">Rs. 54164</span>
-                                    </div>
-                                    <div class="see_all">
-                                        <a href="#">See All Features</a>
-                                    </div>
-                                    <div class="modal_add_to_cart mb-15">
-                                        <form action="#">
-                                            <input type="number" min="0" max="100" step="1">
-                                            <button type="submit">Add To Cart</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal_description mb-15">
-                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus quibusdam
-                                            nisi voluptas consequatur tempora, recusandae nemo blanditiis eaque odit
-                                            voluptatibus voluptatem, ipsa incidunt fugiat a.</p>
-                                    </div>
-                                    <div class="modal_social">
-                                        <h2>Share this Product</h2>
-                                        <ul>
-                                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-rss"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-youtube"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- modal section ends -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <!-- JavaScript Bundle with Popper.js -->

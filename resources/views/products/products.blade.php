@@ -191,7 +191,10 @@
                     </div> <!-- card.// -->
                 </aside>
             </div>
-            <div class="col-lg-9 p-0" id="post_data">
+            <div class="col-lg-9 p-0 position-relative" id="post_data">
+                <div class="d-flex justify-content-center align-items-center align-content-center center">
+                    <img src="{{ asset('/images/loader.gif') }}" alt="loader" class="hide loader">
+                </div>
                         @include('products.data_view')
             </div>
         </div>
