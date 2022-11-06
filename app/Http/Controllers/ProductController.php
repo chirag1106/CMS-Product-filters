@@ -57,12 +57,29 @@ class ProductController extends Controller
                     $products = $products->orderby('prod_name', 'Asc');
                 else if ($request->sort == 'nameDesc')
                     $products = $products->orderby('prod_name', 'Desc');
-                else if ($request->sort == 'price_lh')
-                    $products = $products->orderBy('attr_14k_regular', 'Asc');
-                else if ($request->sort == 'price_hl')
-                    $products = $products->orderBy('attr_14k_regular', 'Desc');
+                else if ($request->sort == 'price_lh'){
+                    if($this->product_type == 'platinum'){
+                        $products = $products->orderBy('attr_platinum_regular', 'Asc');
+                    }
+                    else if($this->product_type == '18k'){
+                        $products = $products->orderBy('attr_18k_regular', 'Asc');
+                    }
+                    else{
+                        $products = $products->orderBy('attr_14k_regular', 'Asc');
+                    }
+                }
+                else if ($request->sort == 'price_hl'){
+                    if($this->product_type == 'platinum'){
+                        $products = $products->orderBy('attr_platinum_regular', 'Desc');
+                    }
+                    else if($this->product_type == '18k') {
+                        $products = $products->orderBy('attr_18k_regular', 'Desc');
+                    }else{
+                        $products = $products->orderBy('attr_14k_regular', 'Desc');
+                    }
+                }
                 else if ($request->sort == 'most_popular')
-                    $products = $products->inRandomOrder();
+                    $products = $products->inRandomOrder()->limit(10);
             }
 
             if ($request->has('sub_cat') && !empty($request->sub_cat)) {
@@ -83,9 +100,6 @@ class ProductController extends Controller
                 $this->filters += ['min_price' => $request->min_price];
                 $this->filters += ['max_price' => $request->max_price];
 
-                // if( $request->product_type == null ){
-                //     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
-                // }
                 if ($this->product_type == '14k') {
                     $products = $products->whereBetween('attr_14k_regular', [$request->min_price, $request->max_price]);
                 } else if ($this->product_type == '18k') {
@@ -239,7 +253,7 @@ class ProductController extends Controller
         echo '<pre>';
         print_r($product);
         echo '</pre>';
-                // return view('products.product_view', ['product' => $product]);
+        // return view('products.product_view', ['product' => $product]);
 
     }
 }

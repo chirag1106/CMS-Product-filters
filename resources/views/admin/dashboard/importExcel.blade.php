@@ -14,7 +14,7 @@
                             <fieldset>
                                 <label>Select File to Upload
                                     <small class="warning text-muted">
-                                        {{ __('Please upload only Excel (.xlsx or .xls) files') }}
+                                        {{ __('Please upload only Excel (.csv) files') }}
                                     </small>
                                 </label>
 
