@@ -236,7 +236,10 @@ class ProductController extends Controller
     public function showParticularProduct($prod_sku)
     {
         $product = Product::where('prod_sku', '=', $prod_sku)->get()->toArray();
-        return view('products.product_view', ['product' => $product]);
+        echo '<pre>';
+        print_r($product);
+        echo '</pre>';
+                // return view('products.product_view', ['product' => $product]);
 
     }
 }
